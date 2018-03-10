@@ -23,7 +23,7 @@ public class PostController{
 
     @GetMapping("/posts")
     public List<Post> getAllPost(){
-        return post.findAll()
+        return post.findAll();
     }
 
     @PostMapping("/post")
@@ -43,7 +43,7 @@ public class PostController{
     public Post updatePost(@PathVariable(value = "id") Long postId, 
     @Valid @RequestBody Post postDetails){
         Post postNode = post.findById(postId).orElseThrow(() -> new ResourceNotFoundException(
-                "Post", "id", postId)
+                "Post", "id", postId));
         postNode.setTitle(postDetails.getTitle());
         postNode.setContent(postDetails.getContent());
         return post.save(postNode);
@@ -58,5 +58,5 @@ public class PostController{
         this.post.delete(post);
 
         return ResponseEntity.ok().build();
-    )
+    }
 }
